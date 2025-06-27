@@ -59,6 +59,7 @@ kubectl wait --for=condition=available --timeout=300s deployment/mkdocs -n mkdoc
 ## Access Methods
 
 ### 1. NodePort (Default)
+
 ```bash
 # Access via NodePort
 http://localhost:30080
@@ -67,12 +68,14 @@ http://<node-ip>:30080
 ```
 
 ### 2. Port Forward (Development)
+
 ```bash
 kubectl port-forward svc/mkdocs 8000:8000 -n mkdocs
 # Then access: http://localhost:8000
 ```
 
 ### 3. Ingress (Production)
+
 ```bash
 # Add to /etc/hosts (for local testing)
 echo "127.0.0.1 mkdocs.local" | sudo tee -a /etc/hosts
@@ -82,6 +85,7 @@ http://mkdocs.local
 ```
 
 ### 4. LoadBalancer (Cloud)
+
 ```bash
 # Deploy LoadBalancer service
 kubectl apply -f k8s/mkdocs-service-loadbalancer.yaml -n mkdocs
@@ -94,6 +98,7 @@ kubectl get svc mkdocs-lb -n mkdocs
 ## Configuration
 
 ### Updating ConfigMap
+
 ```bash
 # Edit the configmap
 kubectl edit configmap mkdocs-config -n mkdocs
@@ -106,6 +111,7 @@ kubectl rollout restart deployment/mkdocs -n mkdocs
 ```
 
 ### Updating Secrets
+
 ```bash
 # Encode new values
 echo -n "new-secret-value" | base64
@@ -123,6 +129,7 @@ kubectl rollout restart deployment/mkdocs -n mkdocs
 ## Monitoring and Troubleshooting
 
 ### Check deployment status
+
 ```bash
 kubectl get pods -l app=mkdocs -n mkdocs
 kubectl get svc -n mkdocs
@@ -130,6 +137,7 @@ kubectl get ingress -n mkdocs
 ```
 
 ### View logs
+
 ```bash
 # All pods
 kubectl logs -l app=mkdocs -n mkdocs
@@ -142,6 +150,7 @@ kubectl logs -f -l app=mkdocs -n mkdocs
 ```
 
 ### Debug pod issues
+
 ```bash
 # Describe pod
 kubectl describe pod <pod-name> -n mkdocs
@@ -154,6 +163,7 @@ kubectl get events -n mkdocs --sort-by='.lastTimestamp'
 ```
 
 ### Scale deployment
+
 ```bash
 # Scale up/down
 kubectl scale deployment mkdocs --replicas=3 -n mkdocs
@@ -179,7 +189,7 @@ kubectl delete -f k8s/ -n mkdocs
 
 ## File Structure
 
-```
+```plaintext
 k8s/
 ├── mkdocs-deployment.yaml       # Main application deployment
 ├── mkdocs-service.yaml          # NodePort service
