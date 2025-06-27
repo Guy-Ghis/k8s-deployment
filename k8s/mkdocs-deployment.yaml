@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mkdocs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mkdocs
+  template:
+    metadata:
+      labels:
+        app: mkdocs
+    spec:
+      containers:
+        - name: mkdocs
+          image: squidfunk/mkdocs-material
+          args: ["serve", "--dev-addr=0.0.0.0:8000"]
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - name: docs-volume
+              mountPath: /docs
+      volumes:
+        - name: docs-volume
+          hostPath:
+            path: /home/ubuntu/guy_ghis/projects/my-mk-docs
+            type: Directory
