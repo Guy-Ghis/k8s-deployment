@@ -1,5 +1,7 @@
-# Use the official MkDocs image as a base
-FROM squidfunk/mkdocs-material:latest
+FROM python:3.9-slim
+
+# Install required packages
+RUN pip install mkdocs-material
 
 # Set the working directory
 WORKDIR /docs
