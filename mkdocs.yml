@@ -3,3 +3,13 @@ nav:
   - Home: index.md
 theme:
   name: material
+  palette:
+    - scheme: default
+      primary: green
+      accent: indigo
+    - scheme: slate
+      primary: pink
+      accent: lime
+  font:
+    text: Times New Roman
+    code: Fira Code
