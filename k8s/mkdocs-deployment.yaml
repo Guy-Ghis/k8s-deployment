@@ -16,8 +16,7 @@ spec:
     spec:
       containers:
         - name: mkdocs
-          image: squidfunk/mkdocs-material:latest
-          args: ["serve", "--dev-addr=0.0.0.0:8000"]
+          image: ghcr.io/guy-ghis/k8s-deployment:latest
           ports:
             - containerPort: 8000
               name: http

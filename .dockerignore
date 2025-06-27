@@ -1,0 +1,11 @@
+minikube-linux-amd64
+.vscode/
+k8s/mkdocs-secret.yaml
+*.log
+*.tmp
+*.out
+node_modules/
+.env
+*.local
+deploy.sh
+README.md
