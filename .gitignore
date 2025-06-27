@@ -1,3 +1,22 @@
+# Binaries
 minikube-linux-amd64
-minikube-linux-amd64
+
+# IDE settings
 .vscode/
+
+# Kubernetes secrets
+k8s/mkdocs-secret.yaml
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.out
+
+# Node modules (if applicable)
+node_modules/
+
+# Environment files
+.env
+*.local

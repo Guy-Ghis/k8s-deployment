@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mkdocs-ingress
+  labels:
+    app: mkdocs
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    # Enable CORS if needed
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range"
+spec:
+  ingressClassName: nginx  # Adjust based on your ingress controller
+  rules:
+    - host: mkdocs.local  # Change to your domain
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: mkdocs
+                port:
+                  number: 8000
+  # Uncomment for HTTPS/TLS
+  # tls:
+  #   - hosts:
+  #       - mkdocs.local
+  #     secretName: mkdocs-tls

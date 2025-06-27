@@ -2,11 +2,15 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mkdocs
+  labels:
+    app: mkdocs
 spec:
   selector:
     app: mkdocs
-  type: NodePort
+  type: NodePort  # Changed to LoadBalancer for cloud environments
   ports:
-    - port: 8000
+    - name: http
+      port: 8000
       targetPort: 8000
-      nodePort: 30080  # Access via localhost:30080
+      nodePort: 30081  # Access via localhost:30081
+      protocol: TCP

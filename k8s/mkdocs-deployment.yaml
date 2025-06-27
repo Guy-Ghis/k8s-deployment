@@ -2,8 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mkdocs
+  labels:
+    app: mkdocs
 spec:
-  replicas: 1
+  replicas: 2  # Increased for better availability
   selector:
     matchLabels:
       app: mkdocs
@@ -14,15 +16,54 @@ spec:
     spec:
       containers:
         - name: mkdocs
-          image: squidfunk/mkdocs-material
+          image: squidfunk/mkdocs-material:latest
           args: ["serve", "--dev-addr=0.0.0.0:8000"]
           ports:
             - containerPort: 8000
+              name: http
+          # Environment variables from ConfigMap
+          envFrom:
+            - configMapRef:
+                name: mkdocs-config
+          # Environment variables from Secret
+          env:
+            - name: SESSION_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: mkdocs-secret
+                  key: session-secret
+          # Resource limits
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          # Health checks
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 5
           volumeMounts:
             - name: docs-volume
               mountPath: /docs
+            - name: config-volume
+              mountPath: /docs/mkdocs.yml
+              subPath: mkdocs.yml
       volumes:
         - name: docs-volume
           hostPath:
             path: /home/ubuntu/guy_ghis/projects/my-mk-docs
             type: Directory
+        - name: config-volume
+          configMap:
+            name: mkdocs-config

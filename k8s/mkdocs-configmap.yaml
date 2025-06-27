@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mkdocs-config
+  labels:
+    app: mkdocs
+data:
+  # MkDocs configuration
+  mkdocs.yml: |
+    site_name: My Project Docs
+    nav:
+      - Home: index.md
+    theme:
+      name: material
+      palette:
+        - scheme: default
+          primary: green
+          accent: indigo
+        - scheme: slate
+          primary: pink
+          accent: lime
+      font:
+        text: Times New Roman
+        code: Fira Code
+      features:
+        - navigation.tabs
+        - navigation.sections
+        - toc.integrate
+        - search.highlight
+    plugins:
+      - search
+    markdown_extensions:
+      - admonition
+      - codehilite
+      - toc:
+          permalink: true
+  
+  # Environment configuration
+  ENVIRONMENT: "production"
+  LOG_LEVEL: "info"
+  DOCS_DIR: "/docs"
+  SITE_DIR: "/site"
