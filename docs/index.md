@@ -29,7 +29,7 @@ cd my-project
 
 This creates a basic project structure:
 
-```
+```plaintext
 my-project/
     mkdocs.yml    # Configuration file
     docs/
@@ -56,6 +56,7 @@ theme:
 MkDocs uses Markdown for writing documentation. Here are some basic formatting examples:
 
 #### Headers
+
 ```markdown
 # H1 Header
 ## H2 Header
@@ -63,12 +64,15 @@ MkDocs uses Markdown for writing documentation. Here are some basic formatting e
 ```
 
 #### Text Formatting
+
 - **Bold text**: `**bold**` or `__bold__`
 - *Italic text*: `*italic*` or `_italic_`
 - `Inline code`: `code`
 
 #### Lists
+
 Unordered lists:
+
 ```markdown
 - Item 1
 - Item 2
@@ -76,6 +80,7 @@ Unordered lists:
 ```
 
 Ordered lists:
+
 ```markdown
 1. First item
 2. Second item
@@ -83,6 +88,7 @@ Ordered lists:
 ```
 
 #### Links and Images
+
 ```markdown
 [Link text](https://example.com)
 ![Alt text](path/to/image.jpg)
@@ -193,6 +199,7 @@ plugins:
 ```
 
 Common plugins:
+
 - `search`: Adds search functionality
 - `minify`: Minifies HTML, CSS, and JS
 - `git-revision-date`: Adds last modification date
@@ -250,18 +257,21 @@ Create callout boxes:
 
 ### Common Issues
 
-**MkDocs command not found**
-- Ensure MkDocs is installed: `pip install mkdocs`
-- Check your PATH environment variable
+- **MkDocs command not found**
 
-**Theme not loading**
-- Verify theme is installed: `pip install mkdocs-material`
-- Check theme name in `mkdocs.yml`
+  - Ensure MkDocs is installed: `pip install mkdocs`
+  - Check your PATH environment variable
 
-**Build errors**
-- Check for typos in `mkdocs.yml`
-- Ensure all referenced files exist
-- Validate YAML syntax
+- **Theme not loading**
+
+  - Verify theme is installed: `pip install mkdocs-material`
+  - Check theme name in `mkdocs.yml`
+
+- **Build errors**
+
+  - Check for typos in `mkdocs.yml`
+  - Ensure all referenced files exist
+  - Validate YAML syntax
 
 ### Getting Help
 
